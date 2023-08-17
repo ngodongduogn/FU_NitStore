@@ -1,0 +1,64 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/shared/_LayoutShop.cshtml";
+}
+
+<section style="background-color: #eee">
+    <h1 class="p-3">List product</h1>
+    <div class="container py-5">
+        <div class="row">
+            @if (ViewBag.ListProduct.Count > 0)
+            {
+                @foreach (var item in ViewBag.ListProduct)
+                {
+                    <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+                        <div class="card text-black">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(item.imageBit)"
+                         class="card-img-top"
+                         alt="Product Image" />
+                            <div class="card-body">
+                                <div class="text-center mt-1">
+                                    <h4 class="card-title">@item.Name</h4>
+                                    <h6 class="text-primary mb-1 pb-3">Starting at @item.Price ₫</h6>
+                                </div>
+
+                                <div class="text-center">
+                                    <p>@item.Description</p>
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <button type="button"
+                                    class="btn btn-primary flex-fill me-1"
+                                    data-mdb-ripple-color="dark"
+                                    onclick="window.location.href='@Url.Action("ProductDetail","Products", new { id = @item.Id})'">
+                                        Learn more
+                                    </button>
+                                    <button type="button"
+                                    class="btn btn-primary flex-fill me-1"
+                                    data-mdb-ripple-color="dark"
+                                    onclick="window.location.href='@Url.Action("AddCartItem","Home", new { productId = @item.Id})'">
+                                        Add to Cart
+                                    </button>
+                                    @*<button onclick="window.location.href='@Url.Action("AddCartItem","Home", new { productId = @item.Id})''" type="button" class="btn btn-primary flex-fill me-1">
+                            Add to Cart
+                            </button>*@
+                                    @* <a href="@Url.Action("ProductDetail","Products", new { id = @item.Id})">
+                            Learn more
+                            </a>
+                            <a href="@Url.Action("AddCartItem","Home", new { productId = @item.Id})">
+                            Add to Cart
+                            </a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2 style="margin-left: 40%"> No Product found!</h2>
+            }
+            
+
+        </div>
+    </div>
+</section>

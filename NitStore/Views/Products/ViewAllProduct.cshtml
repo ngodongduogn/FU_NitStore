@@ -1,0 +1,70 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_LayoutMaketer";
+}
+<style>
+    .cover {
+        object-fit: cover;
+        width: auto;
+        margin: 20px;
+        height: 300px;
+    }
+</style>
+<div class="d-flex container-fluid justify-content-center">
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <a>@ViewBag.Message !</a>
+        }
+    </div>
+    <div class="w-75 mt-5">
+        <button type="button" onclick="window.location.href='@Url.Action("AddProduct","Products")'" class="btn btn-success">Add New Product</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">CategoryName</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th class="justify-content-center text-center" scope="col">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            @{
+                int index = 1;
+            }
+            <tbody>
+                @foreach (var item in ViewBag.ListProduct)
+                {
+                    <tr>
+
+                        <th scope="row">@index</th>
+                        @{
+                            index++;
+                        }
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.Status</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Price</td>
+                        <td><img class="cover" src="data:image;base64,@System.Convert.ToBase64String(item.imageBit)" /></td>
+                        <td class="justify-content-center text-center">
+                            @*<button type="button" class="btn btn-danger">Remove</button>*@
+                            @Html.ActionLink("Remove", "DeleteConfirmed", new { id = item.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                            @Html.ActionLink("Edit", "EditProduct", new { id = item.Id })
+                            @*<button type="button" class="btn btn-warning">Edit</button>*@
+                        </td>
+                    </tr>
+                }
+                <a asp-action="HomeMaketer" asp-controller="Home">  Back to List</a>
+            </tbody>
+        </table>
+
+    </div>
+</div>

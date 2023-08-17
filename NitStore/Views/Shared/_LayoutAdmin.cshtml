@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous" />
+    <title>Admin Site</title>
+</head>
+<body>
+    <div class="d-flex flex-column" style="margin: 0; height: 100vh">
+        <div>
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">NIT Admin</span>
+                    <nav class="nav">
+                        @Html.ActionLink("Manage User", "ViewAllUser", "Users", new { @class = "nav-link" }, null) | 
+                        @Html.ActionLink("Logout", "Logout", "Authen", new {}, null)
+                    </nav>
+                </div>
+            </nav>
+        </div>
+        @RenderBody()
+        <footer style="position: fixed; bottom: 0; width: 100%"
+                class="align-items-end bg-dark text-center text-white">
+            <div class="container p-4">
+                <section class="">
+                    <form action="">
+                        <div class="row d-flex justify-content-center"></div>
+                    </form>
+                </section>
+                <section class="mb-4">
+                      <p>
+            NIT Laptop đơn vị cung câp thiết bị laptop văn phòng hàng đầu khu
+            vực Đông Nam Á
+          </p>
+                </section>
+            </div>
+
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2020 Copyright:
+                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

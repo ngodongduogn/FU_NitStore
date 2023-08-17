@@ -1,0 +1,40 @@
+﻿@model NitStore.Models.DTO.SliderAddDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutMaketer.cshtml";
+}
+<div class="container">
+    <h1>Create</h1>
+
+    <h4>Slider</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            @using (Html.BeginForm("Create", "Sliders", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label asp-for="CampaignId" class="control-label"></label>
+                    @Html.DropDownList("CampaignId", new SelectList(ViewBag.ListCampaigns, "Id", "Name"))
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-form-label">Select 1 Picture</label>
+                        <input asp-for="Image" class="form-control" multiple />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+

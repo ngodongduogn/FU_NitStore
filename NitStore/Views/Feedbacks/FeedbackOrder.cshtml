@@ -1,0 +1,55 @@
+﻿@model List<NitStore.Models.DTO.FeedbackOrderDTO>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/shared/_LayoutShop.cshtml";
+}
+
+@using (Html.BeginForm("FeedbackOrder", "Feedbacks", FormMethod.Post,
+                             new { enctype = "multipart/form-data" }))
+{
+
+    <div class="d-flex container-fluid justify-content-center">
+        <div class="w-75 mt-5">
+            <h1>Add feedback for Order</h1>
+            @for (var i = 0; i < @Model.Count; i++){
+                @Html.HiddenFor(model => model[i].OrderID)
+                @Html.HiddenFor(model => model[i].ProductId)
+                @Html.HiddenFor(model => model[i].CustomerId)
+                <div class="col-md-2 col-lg-2 col-xl-2">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(@Model[i].imageBit)"
+                 class="img-fluid rounded-3"
+                 alt="" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">@Model[i].ProductName</span>
+                    @Html.EditorFor(model => model[i].feedback, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Rating</span>
+                    @Html.EditorFor(model => model[i].Rate, new { htmlAttributes = new { @class = "form-control", min = 0, max = 5 } })
+                </div>
+            }
+            
+
+
+
+            <div class="form-group btn-create">
+                <div>
+                    <input type="submit" value="Add Feedback" class=" btn btn-warning btn-normal" />
+                    @*<span style="color: @TempData["Color"]">
+                @TempData["Message"]
+                </span>
+                <span style="color: @TempData["Color"]">
+                @TempData["SuccessMessage"]
+                </span>
+                <span style="color: @TempData["Color"]">
+                @TempData["ErrorMessage"]
+                </span>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

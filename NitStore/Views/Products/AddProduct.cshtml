@@ -1,0 +1,77 @@
+﻿@model NitStore.Models.DTO.ProductAddDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_LayoutMaketer";
+} 
+
+@using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, 
+                               new { enctype = "multipart/form-data" }))
+{
+    
+    <div class="d-flex container-fluid justify-content-center">
+        <div class="w-75 mt-5">
+            <h1>Add new product</h1>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Product Name</span>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+            <div class="input-group mb-3">
+                @*<span class="mt-2"> Choose Image file(es):</span>
+                <input class="form-control" type="file" name="files" id="files" multiple style="min-width: 50%;" />*@
+                <div class="form-group">
+                    <label class="col-form-label">Select 1/n Picture</label>
+                    <input asp-for="Imagess" class="form-control" multiple />
+                    <span asp-validation-for="Imagess" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+                @Html.DropDownListFor(model => model.CategoryId, Model.CategoryList,
+           new
+                {
+               @class = "form-control selectpicker",
+               data_live_search = "true"
+           })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group btn-create">
+            <div>
+                <input type="submit" value="AddProduct" class=" btn btn-warning btn-normal" />
+                @*<span style="color: @TempData["Color"]">
+                    @TempData["Message"]
+                </span>
+                <span style="color: @TempData["Color"]">
+                    @TempData["SuccessMessage"]
+                </span>
+                <span style="color: @TempData["Color"]">
+                    @TempData["ErrorMessage"]
+                </span>*@
+            </div>
+        </div>
+        </div>
+    </div>
+}
+
+
+

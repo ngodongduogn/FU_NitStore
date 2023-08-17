@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+
+@model NitStore.Models.Domain.User
+
+
+<div class="d-flex container-fluid justify-content-center">
+     <div class="w-75 mt-5">
+    <form method="post" action="@Url.Action("Edit", "Users")">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Password)
+        
+       
+            <h1>Update user</h1>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div>
+                @Html.EditorFor(model => model.Status) Status
+            </div>
+            <button type="submit" class="mt-2 btn btn-success">Submit</button>
+    </form>
+    </div>
+</div>

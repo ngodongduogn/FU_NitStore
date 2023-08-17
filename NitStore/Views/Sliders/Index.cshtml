@@ -1,0 +1,55 @@
+﻿@model List<NitStore.Models.DTO.SliderShowDTO>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMaketer.cshtml";
+}
+<div class="container">
+
+    <h1>Index</h1>
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <a>@ViewBag.Message !</a>
+        }
+    </div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    SliderId
+                </th>
+                <th>
+                    CampaignName
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SliderId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CampaignName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.SliderId">Delete</a> |
+                        <a asp-action="Details" asp-route-id="@item.SliderId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

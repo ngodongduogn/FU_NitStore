@@ -1,0 +1,53 @@
+﻿@model NitStore.Models.DTO.SliderShowDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutMaketer.cshtml";
+}
+<style>
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<div class="container">
+    <h1>Details</h1>
+
+    <div>
+        <h4>Slider</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CampaignId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CampaignId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CampaignName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CampaignName)
+            </dd>
+            <dt class="col-sm-2">
+                Image:
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dd class="col-sm-10">
+                <div>
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.ImageData)"
+                         class="card-img-top" alt="Product Image" />
+                </div>
+
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

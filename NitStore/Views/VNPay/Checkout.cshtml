@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Check out";
+}
+@{
+    Layout = "~/shared/_LayoutShop.cshtml";
+}
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Thanh toán VnPay tại <a href="">NIT Shop</a></h1>
+
+    </div>
+
+    <div class="table-responsive">
+        <form action="/VNPay/CreatePaymentUrl" id="frmCreateOrder" method="POST">
+            <div class="form-group">
+                <label for="ordertype">Loại hàng hóa </label>
+                <select disabled name="OrderType" id="ordertype" class="form-control">
+                    @if (ViewBag.CategoryListVNPAY != null)
+                    {
+                        @foreach (var item in ViewBag.CategoryListVNPAY)
+                        {
+                            <option value="@item.Name">@item.Name</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="Name">Tên khách hàng</label>
+                <input class="form-control"
+                       id="Name"
+                       name="Name"
+                       type="text"
+                       value="@ViewBag.CustomerName" readonly>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="Amount">Số tiền</label>
+                <input class="form-control"
+                       id="Amount"
+                       name="Amount"
+                       type="text"
+                       value="@ViewBag.TotalMoney" readonly>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="OrderDescription">Nội dung thanh toán</label>
+                <textarea class="form-control"
+                          cols="20"
+                          id="OrderDescription"
+                          name="OrderDescription"
+                          rows="2" readonly>Thanh toán đơn hàng (@ViewBag.OrderId) NitStore</textarea>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Thanh toán (Checkout)</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model NitStore.Models.Domain.CampaignItem
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AddNewCampaignItem";
+    Layout = "~/shared/_LayoutSaleManagers.cshtml";
+}
+<div class="container">
+    <h1>AddNewCampaignItem</h1>
+
+    <h4>CampaignItem</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddNewCampaignItem">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ProductId" class="control-label"></label>
+                    <input asp-for="ProductId" class="form-control" />
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CampaignId" class="control-label"></label>
+                    <input asp-for="CampaignId" class="form-control" value="@ViewBag.CampaignId" readonly />
+                    <span asp-validation-for="CampaignId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Discount" class="control-label"></label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="CampaignItem" asp-route-id="@ViewBag.CampaignId">Back to List</a>
+    </div>
+</div>
+

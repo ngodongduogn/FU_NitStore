@@ -1,0 +1,82 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_LayoutSale";
+}
+<style>
+    .cover {
+        object-fit: cover;
+        width: auto;
+        margin: 20px;
+        height: 300px;
+    }
+</style>
+<div class="d-flex container-fluid justify-content-center">
+    <div class="w-75 mt-5">
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <a>@ViewBag.Message !</a>
+            }
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Money</th>
+                    <th class="justify-content-center text-center" scope="col">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            @{
+                int index = 1;
+            }
+            <tbody>
+                @foreach (var item in ViewBag.ListOrder)
+                {
+                    <tr>
+
+                        <th scope="row">@index</th>
+                        @{
+                            index++;
+                        }
+                        <td>@item.Id</td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.Status</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.TotalMoney</td>
+                        <td class="justify-content-center text-center">
+                            @*@if (item.Status != "Order Shipping")
+                        {
+                        @Html.ActionLink("Shipping Order", "ChangeOrderStatus", new {orderId = item.Id, status = 2 })
+                        }
+                        @if (item.Status != "Order Received" && item.Status != "Order Shipping")
+                        {
+                        @Html.ActionLink("Received", "ChangeOrderStatus", new {orderId = item.Id, status = 3 })
+
+                        }*@
+                            @if (item.Status == "Order Confirm")
+                            {
+                                @Html.ActionLink("Shipping Order", "ChangeOrderStatus", new {orderId = item.Id, status = 2 })
+                            }
+                            @if (item.Status == "Order Shipping")
+                            {
+                                @Html.ActionLink("Received", "ChangeOrderStatus", new {orderId = item.Id, status = 3 })
+                            }
+                            @if (item.Status == "Order Received")
+                            {
+                                @Html.ActionLink("Return Order", "ChangeOrderStatus", new {orderId = item.Id, status = 1 })
+                            }
+                        </td>
+                    </tr>
+                }
+                <a asp-action="HomeSale" asp-controller="Home">  Back to List</a>
+            </tbody>
+        </table>
+
+    </div>
+</div>

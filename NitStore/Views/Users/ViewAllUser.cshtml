@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+@model IEnumerable<NitStore.Models.Domain.User>
+
+<div class="d-flex container-fluid justify-content-center">
+    <div class="w-75 mt-5">
+        @*<button type="button" class="btn btn-success" href="../Admin/Add">Add New User</button>*@
+        <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create", "Users")'">
+            Add New User
+        </button>
+        @{
+            int index = 1;
+        }
+        @if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+
+                        <th scope="col">Role</th>
+                        <th class="justify-content-center text-center" scope="col">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@index</th>
+                            @{
+                                index++;
+                            }
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Status</td>
+                            <td>@item.Role</td>
+                            <td class="justify-content-center text-center">
+                                @*<button type="button" class="btn btn-danger">Remove</button>*@
+                                @*<button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Users", new { id = item.Id})'">
+                        Remove
+                        </button>*@
+                                @*<button type="button" class="btn btn-warning">Edit</button>*@
+                                <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Edit", "Users", new { id = item.Id})'">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
